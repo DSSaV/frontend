@@ -4,6 +4,7 @@ import List from '../components/list';
 import Submenu from '../components/submenu';
 import axios from 'axios';
 import { options } from '../funcs/misc';
+import models_profit from '../data/models_profit.json';
 
 export default ({ match }) => {
 
@@ -16,7 +17,8 @@ export default ({ match }) => {
         predictions: {
             regression: [],
             classifiers: []
-        }
+        },
+        config: {}
     })
 
     // ON LOAD, FETCH ALL PIPELINES
@@ -36,23 +38,52 @@ export default ({ match }) => {
             <List
                 header={ 'regression model fittings' }
                 type={ 'triggers' }
-                data={ options(local.regression_fitting, dispatch) }
+                data={ options(
+                    local.regression_fitting,
+                    dispatch,
+                    '{} fitting history'
+                )}
             />
             <List
                 header={ 'regression ensemble predictions' }
                 type={ 'triggers' }
-                data={ options(local.predictions.regression, dispatch) }
+                data={ options(
+                    local.predictions.regression,
+                    dispatch,
+                    '{} predictions'
+                )}
             />
             { Object.keys(local.predictions.classifiers).map(model =>
                 <List
                     key={ model }
                     header={ model + ' confusion matrix' }
                     type={ 'triggers' }
-                    data={ options(local.predictions.classifiers[model], dispatch) }
+                    data={ options(
+                        local.predictions.classifiers[model],
+                        dispatch,
+                        model + ' {} predictions'
+                    )}
                 />
             )}
+            <List
+                header={ 'profit predictions' }
+                type={ 'triggers' }
+                data={[
+                    ['TEST PROFIT', () => {
+                        dispatch({
+                            type: 'prompt',
+                            payload: {
+                                type: 'line',
+                                header: 'profit calculation',
+                                data: models_profit
+                            }
+                        })
+                    }]
+                ]}
+            />
             <Submenu
                 pipeline={ match.params.name }
+                config={ local.config }
                 dispatch={ dispatch }
             />
         </Fragment>

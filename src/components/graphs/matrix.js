@@ -1,15 +1,13 @@
 import React, { Fragment } from 'react';
-import { withSize } from 'react-sizeme';
-import '../../interface/css/plot.scss';
 
-function Foo({ header, data, size, Plot }) { return (
+export default ({ header, data, size, Plot }) => { return (
    <Fragment>
       <div id={ 'header' }>{ header }</div>
       <div id={ 'plot' }>
          <Plot
             data={[{
-               x: ['buy', 'sell', 'hold'],
-               y: ['hold', 'sell', 'buy'],
+               x: ['BUY', 'SELL', 'HOLD'],
+               y: ['HOLD', 'SELL', 'BUY'],
                z: data,
                opacity: 0.7,
                hoverinfo: 'none',
@@ -22,12 +20,13 @@ function Foo({ header, data, size, Plot }) { return (
                },
                type: 'heatmap'
             }, {
-               x: ['buy', 'sell', 'hold', 'buy', 'sell', 'hold', 'buy', 'sell', 'hold'],
-               y: ['hold', 'hold', 'hold', 'sell', 'sell', 'sell', 'buy', 'buy', 'buy'],
+               x: ['BUY', 'SELL', 'HOLD', 'BUY', 'SELL', 'HOLD', 'BUY', 'SELL', 'HOLD'],
+               y: ['HOLD', 'HOLD', 'HOLD', 'SELL', 'SELL', 'SELL', 'BUY', 'BUY', 'BUY'],
                mode: "text",
                text: data.flat().map(String),
                type: "scattergl",
                hoverinfo: 'none',
+               textposition: 'middle center',
                textfont: {
                   color: 'white',
                   size: 20
@@ -41,8 +40,6 @@ function Foo({ header, data, size, Plot }) { return (
       </div>
    </Fragment>
 )}
-
-export default withSize()(Foo)
 
 // GRID STATE
 const grid_layout = {

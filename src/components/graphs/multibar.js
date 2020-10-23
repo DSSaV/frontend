@@ -1,8 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { withSize } from 'react-sizeme';
-import '../../interface/css/plot.scss';
 
-function Foo({ header, data, size, Plot }) {
+export default ({ header, data, size, Plot }) => {
 
    // LOCAL STATE
    const [bars, set_bars] = useState([])
@@ -32,49 +30,6 @@ function Foo({ header, data, size, Plot }) {
       })
       set_bars(container)
    }, [data])
-   
-   // STATIC GRID LAYOUT
-   const grid_layout = {
-      linecolor: 'rgba(124, 213, 255, 0.425)',
-      tickcolor: 'rgba(124, 213, 255, 0.425)',
-      linewidth: 1,
-      mirror: true,
-      gridcolor: '#ffffff15',
-      tickfont : {
-         size : 14,
-         color : 'white'
-      }
-   }
-
-   // STATIC PLOT LAYOUT
-   const plot_layout = {
-      height: 450,
-      margin: {
-         l: 50,
-         r: 1,
-         b: 30,
-         t: 2,
-         pad: 0
-      },
-      showlegend: true,
-      legend: {
-         font: {
-            size: 14,
-            color: 'white'
-         },
-         borderwidth: 2,
-         x: 1.01,
-         y: 0.5
-      },
-      xaxis: grid_layout,
-      yaxis: {
-         ...grid_layout,
-         fixedrange: true,
-         range: [0.97, 1   ],
-      },
-      plot_bgcolor: 'rgba(124, 213, 255, 0.11)',
-      paper_bgcolor: 'transparent'
-   }
 
    return (
       <Fragment>
@@ -95,4 +50,48 @@ function Foo({ header, data, size, Plot }) {
    )
 }
 
-export default withSize()(Foo)
+// STATIC GRID LAYOUT
+const grid_layout = {
+   linecolor: 'rgba(124, 213, 255, 0.425)',
+   tickcolor: 'rgba(124, 213, 255, 0.425)',
+   linewidth: 1,
+   mirror: true,
+   gridcolor: '#ffffff15',
+   tickfont : {
+      size : 14,
+      color : 'white'
+   }
+}
+
+// STATIC PLOT LAYOUT
+const plot_layout = {
+   height: 450,
+   margin: {
+      l: 50,
+      r: 1,
+      b: 30,
+      t: 2,
+      pad: 0
+   },
+   showlegend: true,
+   legend: {
+      font: {
+         size: 13,
+         color: 'white'
+      },
+      borderwidth: 2,
+      x: 1.02,
+      y: 0.5
+   },
+   xaxis: {
+      ...grid_layout,
+      fixedrange: true
+   },
+   yaxis: {
+      ...grid_layout,
+      fixedrange: true,
+      range: [0.97, 1],
+   },
+   plot_bgcolor: 'rgba(124, 213, 255, 0.11)',
+   paper_bgcolor: 'transparent'
+}

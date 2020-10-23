@@ -9,7 +9,13 @@ const values = {
       visible: true,
       type: 'loading',
       payload: null
-   }
+   },
+
+   // REDIRECT PARAMS
+   redirect: {
+      status: false,
+      location: ''
+   },
 }
 
 // REDUCER
@@ -39,6 +45,24 @@ function reducer(state, { type, payload }) {
                visible: false,
                payload: null
             }
+      }}
+
+      // REDIRECT TO PAGE
+      case 'redirect': { return {
+         ...state,
+         redirect: {
+            status: true,
+            location: payload
+         }
+      }}
+
+      // RESET REDIRECT LOGIC
+      case 'reset-redirect': { return {
+         ...state,
+         redirect: {
+            status: false,
+            location: ''
+         }
       }}
       
       // FALLBACK

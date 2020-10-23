@@ -6,10 +6,12 @@ import '../interface/css/prompt.scss';
 import Multibar from './graphs/multibar';
 import Line from './graphs/line';
 import Matrix from './graphs/matrix';
-import Import from './import';
+import Import from './prompt/import';
+import Viewer from './prompt/viewer';
 
 import EventListener from 'react-event-listener';
 import Plot from 'react-plotly.js';
+import { SizeMe } from 'react-sizeme';
 
 // PROMPT CONTAINER
 function Prompt() {
@@ -44,12 +46,15 @@ function Prompt() {
    return (
       <div id={ 'prompt' }>
          <div id={ 'inner' }>
-            <Content
-               type={ state.prompt.type }
-               header={ state.prompt.header }
-               data={ state.prompt.data }
-               other={ state.prompt.other }
-            />
+            <SizeMe>{({ size }) =>
+               <Content
+                  type={ state.prompt.type }
+                  header={ state.prompt.header }
+                  data={ state.prompt.data }
+                  other={ state.prompt.other }
+                  size={ size }
+               />
+            }</SizeMe>
             <EventListener
                target={ document }
                onKeyDown={ key_event }
@@ -64,12 +69,20 @@ function Prompt() {
 }
 
 // PROMPT CONTENT
-function Content({ type, header, data, other }) {
+function Content({ type, header, data, other, size }) {
    switch(type) {
 
       // LOADING
       case 'loading': {
          return <div className="lds-dual-ring" />
+      }
+
+      // JSON VIEWER
+      case 'viewer': {
+         return <Viewer
+            header={ header }
+            other={ other }
+         />
       }
 
       // IMPORT PROMPT
@@ -85,6 +98,7 @@ function Content({ type, header, data, other }) {
          return <Matrix
             header={ header }
             data={ data }
+            size={ size }
             Plot={ Plot }
          />
       }
@@ -94,6 +108,7 @@ function Content({ type, header, data, other }) {
          return <Multibar
             header={ header }
             data={ data }
+            size={ size }
             Plot={ Plot }
          />
       }
@@ -103,6 +118,7 @@ function Content({ type, header, data, other }) {
          return <Line
             header={ header }
             data={ data }
+            size={ size }
             Plot={ Plot }
          />
       }

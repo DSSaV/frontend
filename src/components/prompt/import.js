@@ -1,5 +1,5 @@
 import React, { useContext, Fragment } from 'react';
-import { Context } from "../assets/context";
+import { Context } from "../../assets/context";
 import axios from 'axios';
 import YAML from 'yaml'
 
@@ -75,7 +75,12 @@ export default ({ header, other }) => {
       // IF EVERYTHING WORKED PROPERLY
       }).then(response => {
          if (response.status === 200) {
-            console.log('ALL GOOD')
+
+            // REDIRECT TO THE PIPELINE PAGE
+            dispatch({
+               type: 'redirect',
+               payload: '/pipelines/' + response.data.name
+            })
          } else {
             console.log('RECEIVED WRONG STATUS CODE')
          }

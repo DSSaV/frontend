@@ -12,8 +12,16 @@ function promisify(data, time) {
    })
 }
 
+// eslint-disable-next-line no-extend-native
+String.prototype.format = function() {
+    var i = 0, args = arguments;
+    return this.replace(/{}/g, function () {
+        return typeof args[i] != 'undefined' ? args[i++] : '';
+    })
+}
+
 // SELECT GRAPH TYPE
-function options(json, dispatch) {
+function options(json, dispatch, subheader) {
 
     // CONTAINER
     const container = []
@@ -35,7 +43,7 @@ function options(json, dispatch) {
                         type: 'prompt',
                         payload: {
                             type: 'line',
-                            header: 'training predictions',
+                            header: subheader.format(key),
                             data: data
                         }
                     }) }
@@ -50,7 +58,7 @@ function options(json, dispatch) {
                         type: 'prompt',
                         payload: {
                             type: 'matrix',
-                            header: 'training predictions',
+                            header: subheader.format(key),
                             data: data
                         }
                     }) }
@@ -65,7 +73,7 @@ function options(json, dispatch) {
                         type: 'prompt',
                         payload: {
                             type: 'multibar',
-                            header: 'LINREG Fitting History',
+                            header: subheader.format(key),
                             data: data
                         }
                     }) }

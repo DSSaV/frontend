@@ -1,8 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { withSize } from 'react-sizeme';
-import '../../interface/css/plot.scss';
 
-function Foo({ header, data, size, Plot }) {
+export default ({ header, data, size, Plot }) => {
 
    // LOCAL STATE
    const [lines, set_lines] = useState([])
@@ -12,7 +10,7 @@ function Foo({ header, data, size, Plot }) {
       const container = []
       Object.keys(data).forEach((key, index) => {
          container.push({
-            name: key,
+            name: key.toUpperCase(),
             x: Object.keys(data[key]),
             y: Object.values(data[key]),
             type: 'scatter',
@@ -76,11 +74,11 @@ const plot_layout = {
    showlegend: true,
    legend: {
       font: {
-         size: 14,
+         size: 13,
          color: 'white'
       },
       borderwidth: 2,
-      x: 1.01,
+      x: 1.02,
       y: 0.5
    },
    xaxis: grid_layout,
@@ -91,5 +89,3 @@ const plot_layout = {
    plot_bgcolor: 'rgba(124, 213, 255, 0.11)',
    paper_bgcolor: 'transparent'
 }
-
-export default withSize()(Foo)

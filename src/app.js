@@ -7,6 +7,7 @@ import Init from './assets/init';
 import Menu from './components/menu';
 import Pages from './assets/pages';
 import Prompt from './components/prompt';
+import Redirect from './components/redirect';
 
 export default () => { return (
    <BrowserRouter>
@@ -17,6 +18,7 @@ export default () => { return (
             <Pages />
          </div>
          <Prompt />
+         <Redirect />
       </Provider>
    </BrowserRouter>
 )}
