@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState, Fragment } from 'react';
 import { Context } from "../assets/context";
 import List from '../components/list';
+import Submenu from '../components/submenu';
 import axios from 'axios';
 import { options } from '../funcs/misc';
 
@@ -50,6 +51,10 @@ export default ({ match }) => {
                     data={ options(local.predictions.classifiers[model], dispatch) }
                 />
             )}
+            <Submenu
+                pipeline={ match.params.name }
+                dispatch={ dispatch }
+            />
         </Fragment>
     )
 }

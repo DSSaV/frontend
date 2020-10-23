@@ -6,6 +6,7 @@ import '../interface/css/prompt.scss';
 import Multibar from './graphs/multibar';
 import Line from './graphs/line';
 import Matrix from './graphs/matrix';
+import Import from './import';
 
 import EventListener from 'react-event-listener';
 import Plot from 'react-plotly.js';
@@ -47,6 +48,7 @@ function Prompt() {
                type={ state.prompt.type }
                header={ state.prompt.header }
                data={ state.prompt.data }
+               other={ state.prompt.other }
             />
             <EventListener
                target={ document }
@@ -62,12 +64,20 @@ function Prompt() {
 }
 
 // PROMPT CONTENT
-function Content({ type, header, data }) {
+function Content({ type, header, data, other }) {
    switch(type) {
 
       // LOADING
       case 'loading': {
          return <div className="lds-dual-ring" />
+      }
+
+      // IMPORT PROMPT
+      case 'import': {
+         return <Import
+            header={ header }
+            other={ other }
+         />
       }
 
       // MULTI BAR CHART

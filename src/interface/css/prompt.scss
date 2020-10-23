@@ -15,6 +15,40 @@
    #inner {
       width: 80vw;
 
+      #container {
+         background: rgba(0, 0, 0, 0.548);
+         border: 1px dashed rgba(255, 255, 255, 0.301);
+         margin-top: 2px;
+         height: 80px;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         color: #CECECE;
+         width: 400px;
+         margin: auto;
+         transition: 0.2s;
+
+         #route {
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            z-index: 2;
+            cursor: pointer;
+         }
+
+         #label {
+            position: absolute;
+            z-index: 1;
+            font-size: 16px;
+            text-transform: uppercase;
+         }
+      }
+
+      #container:hover {
+         background: rgba(0, 0, 0, 0.699);
+         color: white;
+      }
+
       #header {
          text-align: center;
          color: white;
