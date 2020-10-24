@@ -102,7 +102,7 @@ export default ({ header, other }) => {
       // IF EVERYTHING WORKED PROPERLY
       }).then(response => {
          if (response.status === 200) {
-            console.log(response.data)
+            other.update(response.data.name, response.data.data)
          } else {
             console.log('RECEIVED WRONG STATUS CODE')
          }

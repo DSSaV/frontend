@@ -4,7 +4,6 @@ import List from '../components/list';
 import Submenu from '../components/submenu';
 import axios from 'axios';
 import { options } from '../funcs/misc';
-import models_profit from '../data/models_profit.json';
 
 export default ({ match }) => {
 
@@ -20,8 +19,19 @@ export default ({ match }) => {
         },
         config: {},
         results: {},
-        new_predictions: {}
+        new_results: {}
     })
+
+    // ADD RESULT TO LIST
+    function add_result(name, value) {
+        set_local({
+            ...local,
+            new_results: {
+                ...local.new_results,
+                [name + ' - new']: value
+            }
+        })
+    }
 
     // ON LOAD, FETCH ALL PIPELINES
     useEffect(() => {
@@ -71,7 +81,10 @@ export default ({ match }) => {
                 header={ 'profit predictions' }
                 type={ 'triggers' }
                 data={ options(
-                    local.results,
+                    {
+                        ...local.results,
+                        ...local.new_results
+                    },
                     dispatch,
                     'prediction profit/loss overview'
                 )}
@@ -80,6 +93,7 @@ export default ({ match }) => {
                 pipeline={ match.params.name }
                 config={ local.config }
                 dispatch={ dispatch }
+                update={ add_result }
             />
         </Fragment>
     )

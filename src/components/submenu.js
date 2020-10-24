@@ -1,7 +1,7 @@
 import React from 'react';
 import '../interface/css/submenu.scss';
 
-export default ({ pipeline, config, dispatch }) => { return (
+export default ({ pipeline, config, dispatch, update }) => { return (
     <div id={ 'submenu' }>
         <li onClick={() => { dispatch({
             type: 'prompt',
@@ -20,7 +20,8 @@ export default ({ pipeline, config, dispatch }) => { return (
                 header: 'predict using pipeline',
                 other: {
                     api: 'use',
-                    pipeline: pipeline
+                    pipeline: pipeline,
+                    update: update
                 }
             }
         }) }}>Predict</li>
