@@ -96,10 +96,25 @@ export default ({ header, other }) => {
    }
 
    function use(content) {
-      console.log('foo')
+      axios.post('http://localhost:8000/pipelines/' + other.pipeline + '/use' , {
+         data: content
 
-      // IRREGARDLESS, STOP LOADING SCREEN
-      dispatch({ type: 'hide-prompt' })
+      // IF EVERYTHING WORKED PROPERLY
+      }).then(response => {
+         if (response.status === 200) {
+            console.log(response.data)
+         } else {
+            console.log('RECEIVED WRONG STATUS CODE')
+         }
+
+         // IRREGARDLESS, STOP LOADING SCREEN
+         dispatch({ type: 'hide-prompt' })
+
+      // OTHERWISE, SHOW ERROR & STOP LOADING
+      }).catch(error => {
+         console.log(error)
+         dispatch({ type: 'hide-prompt' })
+      })
    }
    
    return (

@@ -8,6 +8,7 @@ export default ({ header, data, size, Plot }) => {
    useEffect(() => {
       const colours = ['#FF99CC', '#CC99FF', '#99CCFF', '#99FF99', '#FFFF99']
       const container = []
+
       Object.keys(data).forEach((key, index) => {
          container.push({
             name: key,
@@ -31,6 +32,15 @@ export default ({ header, data, size, Plot }) => {
       set_bars(container)
    }, [data])
 
+      // ADD ALL VALUES TO AN ARRAY
+      const foo = [
+         ...Object.values(data.R2),
+         ...Object.values(data['R2 ADJ']),
+      ]
+
+      // SMALLEST VALUE
+      const smallest = Math.min(...foo)
+
    return (
       <Fragment>
          <div id={ 'header' }>{ header }</div>
@@ -39,7 +49,11 @@ export default ({ header, data, size, Plot }) => {
                data={ bars }
                layout={{
                   width: size.width,
-                  ...plot_layout
+                  ...plot_layout,
+                  yaxis: {
+                     ...plot_layout.yaxis,
+                     range: [smallest * 0.98, 1],
+                  }
                }}
                config={{
                   scrollZoom: true,
@@ -89,8 +103,7 @@ const plot_layout = {
    },
    yaxis: {
       ...grid_layout,
-      fixedrange: true,
-      range: [0.97, 1],
+      fixedrange: true
    },
    plot_bgcolor: 'rgba(124, 213, 255, 0.11)',
    paper_bgcolor: 'transparent'

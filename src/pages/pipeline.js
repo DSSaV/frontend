@@ -18,7 +18,9 @@ export default ({ match }) => {
             regression: [],
             classifiers: []
         },
-        config: {}
+        config: {},
+        results: {},
+        new_predictions: {}
     })
 
     // ON LOAD, FETCH ALL PIPELINES
@@ -68,18 +70,11 @@ export default ({ match }) => {
             <List
                 header={ 'profit predictions' }
                 type={ 'triggers' }
-                data={[
-                    ['TEST PROFIT', () => {
-                        dispatch({
-                            type: 'prompt',
-                            payload: {
-                                type: 'line',
-                                header: 'profit calculation',
-                                data: models_profit
-                            }
-                        })
-                    }]
-                ]}
+                data={ options(
+                    local.results,
+                    dispatch,
+                    'prediction profit/loss overview'
+                )}
             />
             <Submenu
                 pipeline={ match.params.name }

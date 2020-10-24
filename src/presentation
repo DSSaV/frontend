@@ -1,0 +1,14 @@
+KV arguments in yaml are same as the ones in model docs
+the model, scaler and settings have to be saved and serialized
+    model class to attach everything
+    calling the train func automatically fits the scaler
+    calling the predict fund automatically transforms the data through the scaler
+
+    ensemble class to call every submodel
+    ALOT of moving parts so manually doing these things will often result in mistakes
+
+
+WE DONT KNOW HOW TO SOLVE A 50/50 CONFLICT IN POPULAR VOTING FOR CLASSIFIERS
+    ACCURACY WEIGHTING * VOTE
+
+    
