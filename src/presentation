@@ -1,4 +1,3 @@
-KV arguments in yaml are same as the ones in model docs
 the model, scaler and settings have to be saved and serialized
     model class to attach everything
     calling the train func automatically fits the scaler
@@ -11,4 +10,13 @@ the model, scaler and settings have to be saved and serialized
 WE DONT KNOW HOW TO SOLVE A 50/50 CONFLICT IN POPULAR VOTING FOR CLASSIFIERS
     ACCURACY WEIGHTING * VOTE
 
-    
+RELATIVELY LOW MAINTENANCE TO WRITE MODELS
+    SYNTAX IS EXACTLY THE SAME AS MODEL DOCS, WITH ZERO PARSING
+
+LINREG METRIC ALMOST ALWAYS LOOKS THE SAME IE. CLOSE TO 100%
+    CHANGES DRASTICALLY IF TRAIN DATASET IS TOO SMALL
+
+QUANTILE & LOW RETURN
+
+DRASTIC FLUCTUATIONS IN THE STOCK THAT MODELS HAVE NOT SEEN BEFORE MAKES IT PANIC IN A SENSE
+    WEIRD

@@ -52,7 +52,7 @@ export default ({ header, data, size, Plot }) => {
                   ...plot_layout,
                   yaxis: {
                      ...plot_layout.yaxis,
-                     range: [smallest * 0.98, 1],
+                     range: [smallest * 0.98, 1.0015],
                   }
                }}
                config={{

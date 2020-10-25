@@ -15,6 +15,15 @@ export default ({ header, data, size, Plot }) => {
             y: Object.values(data[key]),
             type: 'scatter',
             mode: 'lines',
+            hoverlabel: {
+               bgcolor: 'black',
+               namelength: 20,
+               font: {
+                  color: colours[index],
+                  size: 14
+               }
+            },
+            hovertemplate: '%{y} @ ' + key.toUpperCase() + '<extra></extra>',
             line: {
                width: 1,
                color: colours[index],
